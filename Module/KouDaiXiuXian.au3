@@ -1,30 +1,43 @@
 $appTitle = '微信'
-$appList = WinVisibleOrActive($appTitle)
+$appList = WinListByTitleTo2D($appTitle)
 $mpTitle = '口袋修仙'
 $mpAppID = 'wx3e9f3febb9e9ea21'
 
 Func KouDaiXiuXianStart()
-   KouDaiXiuXianLaunchMP()
+	WinKillByTitle($mpTitle)
 
-   KouDaiXiuXianAd()
+	For $i = 0 To UBound($appList) - 1
+		Local $winList[0]
+		For $j = 0 To UBound($appList, $UBOUND_COLUMNS) - 1
+			If $appList[$i][$j] == '' Then
+			   ContinueLoop
+			EndIf
 
-   KouDaiXiuXianCloseMP()
+			_ArrayAdd($winList, $appList[$i][$j])
+		Next
+
+		KouDaiXiuXianLaunchMP($winList)
+
+		KouDaiXiuXianAd()
+	Next
+
+	WinKillByTitle($mpTitle)
 EndFunc
 
-Func KouDaiXiuXianLaunchMP()
-;~    ConsoleLog('$mpTitle: ' & $mpTitle)
+Func KouDaiXiuXianLaunchMP($winList)
+	ConsoleLog('task: KouDaiXiuXianLaunchMP')
 
-   KouDaiXiuXianCloseMP()
+	WinKillByTitle($mpTitle)
 
    For $i = 1 To 2
-	  For $value In $appList
+	  For $value In $winList
 		 WinActivate($value, '')
 		 Sleep(3000)
 		 OpenWechatMP($mpAppID)
 	  Next
 	  Sleep(15000)
 
-	  $mpList = WinVisibleOrActive($mpTitle)
+	  $mpList = WinListByTitleTo1D($mpTitle)
 	  For $value In $mpList
 		 WinActivate($value, '')
 		 Sleep(1000)
@@ -33,11 +46,11 @@ Func KouDaiXiuXianLaunchMP()
 		 Sleep(1000)
 	  Next
 
-	  KouDaiXiuXianCloseMP()
-   Next
+	  WinKillByTitle($mpTitle)
+	Next
    Sleep(3000)
 
-   For $value In $appList
+   For $value In $winList
 	  WinActivate($value, '')
 	  Sleep(3000)
 	  OpenWechatMP($mpAppID)
@@ -51,7 +64,7 @@ Func KouDaiXiuXianAd()
    WinMinimizeAll()
    Sleep(1000)
 
-   $mpList = WinVisibleOrActive($mpTitle)
+   $mpList = WinListByTitleTo1D($mpTitle)
 
    For $value In $mpList
 	  WinActivate($value, '')
@@ -105,15 +118,5 @@ Func KouDaiXiuXianAd()
 		 Sleep(3000)
 	  Next
 	  Sleep(3000)
-   Next
-EndFunc
-
-Func KouDaiXiuXianCloseMP()
-   For $i = 1 To 2
-	  Local $mpList = WinVisibleOrActive($mpTitle)
-	  For $value In $mpList
-		 WinKill($mpTitle, '')
-		 Sleep(1000)
-	  Next
    Next
 EndFunc
