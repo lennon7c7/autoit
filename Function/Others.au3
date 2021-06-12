@@ -15,7 +15,7 @@ Func WinListByTitle($title)
 		  $total += 1
 	   EndIf
 	Next
- 
+
 	Local $winList[$total]
 	For $i = 1 To $appList[0][0]
 	   ; 7 = Window visible
@@ -26,10 +26,10 @@ Func WinListByTitle($title)
 		 ;~  ConsoleLog('$appList[$i][1]: ' & $appList[$i][1])
 	   EndIf
 	Next
- 
+
  ;~    ConsoleLog($title & ' total: ' & $total)
  ;~    ConsoleLog('winList: ' & $winList)
- 
+
 	Return $winList
  EndFunc
 
@@ -45,7 +45,7 @@ Func WinListByTitle($title)
  ;~ 		 ConsoleLog('gt maxConcurrency: ContinueLoop')
 		  ContinueLoop
 	   EndIf
- 
+
 	   ; 7 = Window visible
 	   ; 15 = Window active
 	   $flag = WinGetState($appList[$i][1])
@@ -54,7 +54,7 @@ Func WinListByTitle($title)
 		  $total += 1
 	   EndIf
 	Next
- 
+
 	Local $winList[$total]
 	For $i = 1 To $appList[0][0]
 	   ; 7 = Window visible
@@ -65,19 +65,19 @@ Func WinListByTitle($title)
 		 ;~  ConsoleLog('$appList[$i][1]: ' & $appList[$i][1])
 	   EndIf
 	Next
- 
+
  ;~    ConsoleLog($title & ' total: ' & $total)
  ;~    ConsoleLog('winList: ' & $winList)
- 
+
 	Return $winList
  EndFunc
-  
+
 ;~ 获取窗口句柄
 ;~ @return array 二维数组
 Func WinListByTitleTo2D($title)
 	Local $winList = WinListByTitle($title)
 	Local $total = UBound($winList)
- 
+
 	Local $key1 = Int($total / $maxConcurrency)
 	Local $key2 = $maxConcurrency
 	Local $mod = Mod($total, $maxConcurrency)
@@ -105,30 +105,30 @@ Func WinListByTitleTo2D($title)
 	 ;~ 	If Mod($i - 1, $maxConcurrency) == 0 Or (($key2 + 1) >= $maxConcurrency) Then
 	 ;~ 		$key2 = 0
 	 ;~ EndIf
- 
+
 		 If Mod($i, $maxConcurrency) == 0 Then
 			 $key1 += 1
 			 $key2 = 0
 		 EndIf
-		 
+
 		 $i += 1
 		 $key2 += 1
- 
+
 		 ;~ ConsoleLog('$i: ' & $i & ' $key1: ' & $key1 - 1 & ' $key2: ' & $key2 - 1 & ' Mod($i, $maxConcurrency): ' & Mod($i, $maxConcurrency))
 		 $winList2D[$key1 - 1][$key2 - 1] = $value
- 
+
 		 ;~ If Mod($i, $maxConcurrency) == 0 Then
- 
+
 		 ;~ _ArrayPush($winList2D[$key1][$key2], $value)
 	 Next
- 
+
 	 ;~ _ArrayDisplay($winList2D)
  ;~    ConsoleLog($title & ' total: ' & $total)
  ;~    ConsoleLog('winList: ' & $winList)
- 
+
 	Return $winList2D
  EndFunc
- 
+
 Func WinKillByTitle($title)
    For $i = 1 To 2
 	  Local $winList = WinListByTitle($title)
@@ -164,4 +164,10 @@ Func TogglePause()
 	  TrayTip("", "暂停", 1)
    WEnd
    Sleep(1000)
+EndFunc
+
+;让计算机休眠，也就是完全断电
+Func SleepOS()
+   Run(@ComSpec & " /c " & 'powercfg -h on', "", @SW_HIDE)
+   Run(@ComSpec & " /c " & 'shutdown -h', "", @SW_HIDE)
 EndFunc

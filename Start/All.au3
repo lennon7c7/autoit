@@ -13,3 +13,5 @@ KouDaiXiuXianStart()
 
 #include <../Module/WuFuXiaoCaiShen.au3>
 WuFuXiaoCaiShenStart()
+
+SleepOS()
