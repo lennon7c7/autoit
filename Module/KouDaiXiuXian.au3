@@ -47,6 +47,13 @@ Func KouDaiXiuXianLaunchMP($winList)
 		 ;~ close offline money
 		 ControlClick($mpTitle, $mpControlClass, $hControl, 'left', 1, 400, 300)
 		 Sleep(5000)
+		 ;~ no video get
+;~ 		 ControlClick($mpTitle, $mpControlClass, $hControl, 'left', 1, 220, 600)
+;~ 		 Sleep(1000)
+;~ 		 ControlClick($mpTitle, $mpControlClass, $hControl, 'left', 1, 220, 600)
+;~ 		 Sleep(1000)
+;~ 		 ControlClick($mpTitle, $mpControlClass, $hControl, 'left', 1, 220, 600)
+;~ 		 Sleep(1000)
 	  Next
 
 	  WinKillByTitle($mpTitle)
@@ -133,4 +140,36 @@ Func KouDaiXiuXianAd()
 	  Next
 	  Sleep(3000)
    Next
+EndFunc
+
+;~ 提现功能
+;~ 暂不支持批量，只随机从其中一个处理
+Func KouDaiXiuXianCashOut()
+   ConsoleLog('task: KouDaiXiuXianCashOut')
+
+   ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 220, 740)
+   Sleep(8000)
+
+   ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 394, 285)
+   Sleep(3000)
+
+   For $i = 1 To 20
+	  ConsoleLog('$i: ' & $i)
+
+	  ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 221, 284)
+	  Sleep(5000)
+
+	  ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 225, 581)
+	  Sleep(3000)
+   Next
+
+   ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 393, 94)
+   Sleep(5000)
+
+   ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 223, 529)
+   Sleep(3000)
+
+   ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 224, 436)
+   Sleep(3000)
+
 EndFunc

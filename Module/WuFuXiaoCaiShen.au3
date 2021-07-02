@@ -115,3 +115,40 @@ Func WuFuXiaoCaiShenTaskAd()
 	  Sleep(3000)
    Next
 EndFunc
+
+;~ 提现功能
+;~ 暂不支持批量，只随机从其中一个处理
+Func WuFuXiaoCaiShenCashOut()
+   ConsoleLog('task: WuFuXiaoCaiShenCashOut')
+
+   ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 50, 740)
+   Sleep(8000)
+
+   ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 400, 240)
+   Sleep(3000)
+
+   For $i = 1 To 20
+	  ConsoleLog('$i: ' & $i)
+
+	  ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 220, 220)
+	  Sleep(3000)
+
+	  ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 220, 220)
+	  Sleep(3000)
+
+	  ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 220, 440)
+	  Sleep(3000)
+
+	  ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 220, 560)
+	  Sleep(3000)
+   Next
+
+   ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 220, 560)
+   Sleep(3000)
+
+   ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 400, 100)
+   Sleep(5000)
+
+   ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 220, 500)
+   Sleep(3000)
+EndFunc
