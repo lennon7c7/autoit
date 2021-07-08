@@ -1,11 +1,11 @@
-$appTitle = '微信'
-$appList = WinListByTitleTo2D($appTitle)
-$mpTitle = '五福小财神'
-$mpAppID = 'wx45300ccbed485ae0'
-$mpControlClass = 'MINIGAMEVIEW'
-$mpControlClassnameNN = 'MINIGAMEVIEW1'
-
 Func WuFuXiaoCaiShenStart()
+   Global $appTitle = '微信'
+   Global $appList = WinListByTitleTo2D($appTitle)
+   Global $mpTitle = '五福小财神'
+   Global $mpAppID = 'wx45300ccbed485ae0'
+   Global $mpControlClass = 'MINIGAMEVIEW'
+   Global $mpControlClassnameNN = 'MINIGAMEVIEW1'
+
 	For $i = 0 To UBound($appList) - 1
 		Local $winList[0]
 		For $j = 0 To UBound($appList, $UBOUND_COLUMNS) - 1

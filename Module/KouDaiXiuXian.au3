@@ -1,11 +1,11 @@
-$appTitle = '微信'
-$appList = WinListByTitleTo2D($appTitle)
-$mpTitle = '口袋修仙'
-$mpAppID = 'wx3e9f3febb9e9ea21'
-$mpControlClass = 'MINIGAMEVIEW'
-$mpControlClassnameNN = 'MINIGAMEVIEW1'
-
 Func KouDaiXiuXianStart()
+   Global $appTitle = '微信'
+   Global $appList = WinListByTitleTo2D($appTitle)
+   Global $mpTitle = '口袋修仙'
+   Global $mpAppID = 'wx3e9f3febb9e9ea21'
+   Global $mpControlClass = 'MINIGAMEVIEW'
+   Global $mpControlClassnameNN = 'MINIGAMEVIEW1'
+
 	For $i = 0 To UBound($appList) - 1
 		Local $winList[0]
 		For $j = 0 To UBound($appList, $UBOUND_COLUMNS) - 1
@@ -100,17 +100,25 @@ Func KouDaiXiuXianAd()
 		 ;~ close share dialog
 		 For $h = 1 To 5
 			$hWnd = WinGetHandle('[Class:SelectContactWnd]')
-			$sHWND = String($hWnd)
-			If $sHWND > 0 Then
+			$sHWND1 = String($hWnd)
+			If $sHWND1 > 0 Then
 			   MouseClick('left', 1182, 749, 1)
-			   Sleep(1000)
+			   Sleep(5000)
 			EndIf
 
 			$hWnd = WinGetHandle('[Title:提示]')
-			$sHWND = String($hWnd)
-			If $sHWND > 0 Then
+			$sHWND2 = String($hWnd)
+			If $sHWND2 > 0 Then
 			   MouseClick('left', 890, 590, 1)
 			   Sleep(5000)
+			EndIf
+
+			If $sHWND1 > 0 And $sHWND2 > 0 And $h == 1 Then
+			   ControlClick($mpTitle, $mpControlClass, $hControl, 'left', 1, 330, 490)
+			   Sleep(1000)
+
+			   ControlClick($mpTitle, $mpControlClass, $hControl, 'left', 1, 220, 420)
+			   Sleep(1000)
 			EndIf
 		 Next
 	  Next
