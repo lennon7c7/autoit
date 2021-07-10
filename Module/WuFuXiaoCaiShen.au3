@@ -1,3 +1,4 @@
+;~ 调用入口
 Func WuFuXiaoCaiShenStart()
    Global $appTitle = '微信'
    Global $appList = WinListByTitleTo2D($appTitle)
@@ -7,6 +8,7 @@ Func WuFuXiaoCaiShenStart()
    Global $mpControlClassnameNN = 'MINIGAMEVIEW1'
 
 	For $i = 0 To UBound($appList) - 1
+		;~ step1: 打开小程序
 		Local $winList[0]
 		For $j = 0 To UBound($appList, $UBOUND_COLUMNS) - 1
 			If $appList[$i][$j] == '' Then
@@ -15,16 +17,17 @@ Func WuFuXiaoCaiShenStart()
 
 			_ArrayAdd($winList, $appList[$i][$j])
 		Next
-
 		WuFuXiaoCaiShenLaunchMP($winList)
 
+		;~ step2: 刷广告
 		WuFuXiaoCaiShenTaskAd()
 	Next
 
-   WinKillByTitle($mpTitle)
+	;~ step3: 关闭小程序
+   	WinKillByTitle($mpTitle)
 EndFunc
 
-
+;~ 启动小程序
 Func WuFuXiaoCaiShenLaunchMP($winList)
 	ConsoleLog('task: WuFuXiaoCaiShenLaunchMP')
 
@@ -48,6 +51,7 @@ Func WuFuXiaoCaiShenLaunchMP($winList)
    Sleep(15000)
 EndFunc
 
+;~ 刷广告
 Func WuFuXiaoCaiShenTaskAd()
    ConsoleLog('task: WuFuXiaoCaiShenTaskAd')
 

@@ -1,3 +1,4 @@
+;~ 调用入口
 Func KouDaiXiuXianStart()
    Global $appTitle = '微信'
    Global $appList = WinListByTitleTo2D($appTitle)
@@ -7,6 +8,7 @@ Func KouDaiXiuXianStart()
    Global $mpControlClassnameNN = 'MINIGAMEVIEW1'
 
 	For $i = 0 To UBound($appList) - 1
+		;~ step1: 打开小程序
 		Local $winList[0]
 		For $j = 0 To UBound($appList, $UBOUND_COLUMNS) - 1
 			If $appList[$i][$j] == '' Then
@@ -15,15 +17,17 @@ Func KouDaiXiuXianStart()
 
 			_ArrayAdd($winList, $appList[$i][$j])
 		Next
-
 		KouDaiXiuXianLaunchMP($winList)
 
+		;~ step2: 刷广告
 		KouDaiXiuXianAd()
 	Next
 
+	;~ step3: 关闭小程序
 	WinKillByTitle($mpTitle)
 EndFunc
 
+;~ 启动小程序
 Func KouDaiXiuXianLaunchMP($winList)
 	ConsoleLog('task: KouDaiXiuXianLaunchMP')
 
@@ -68,6 +72,7 @@ Func KouDaiXiuXianLaunchMP($winList)
    Sleep(15000)
 EndFunc
 
+;~ 刷广告
 Func KouDaiXiuXianAd()
    ConsoleLog('task: KouDaiXiuXianAd')
 
@@ -179,5 +184,4 @@ Func KouDaiXiuXianCashOut()
 
    ControlClick($mpTitle, $mpControlClass, '[CLASS:MINIGAMEVIEW; INSTANCE:1]', 'left', 1, 224, 436)
    Sleep(3000)
-
 EndFunc
